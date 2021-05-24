@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken'); //import jsonwebtoken 
-const User = require('../db').import('../models/user');
+const User = require('../db').import('../models/admin');
 
 const validateSession = (req, res, next) => {
     const token = req.headers.authorization;
@@ -10,16 +10,16 @@ const validateSession = (req, res, next) => {
         jwt.verify(token,process.env.JWT_SECRET, (err, decodeToken) => {
             console.log('decodeToken --> ', decodeToken);
             if (!err && decodeToken) {
-                User.findOne({
+                Admin.findOne({
                     where: {
                         id: decodeToken.id
                     }
                 })
-             .then(user => {
-                console.log('user -->', user);
-                if (!user) throw err;
+             .then(admin => {
+                console.log('admin -->', admin);
+                if (!admin) throw err;
                 console.log('req -->', req);
-                req.user = user;
+                req.admin = admin;
                 return next();
             })
             .catch(err => next(err));

@@ -1,27 +1,26 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('workout_log', 'postgres', 'password', {
+const sequelize = new Sequelize('atlas_survey', 'postgres', 'password', {
     host: 'localhost',
     dialect: 'postgres'
 });
 
 sequelize.authenticate().then(
     function() {
-        console.log('Connected to workout_log postgres database');
+        console.log('Connected to atlas_survey postgres database');
     },
     function(err){
         console.log(err);
     }
 );
 
-User = sequelize.import('./models/user');
-Logs = sequelize.import('./models/log')
-UserInfo = sequelize.import('./models/userinfo')
+Admin = sequelize.import('./models/admin');
+Survey = sequelize.import('./models/survey')
 
-Logs.belongsTo(User);
-User.hasMany(Logs);
 
-User.hasOne(UserInfo);
-UserInfo.belongsTo(User);
+Survey.belongsTo(Admin);
+Admin.hasMany(Survey);
+
+
 
 
 module.exports = sequelize;
