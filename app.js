@@ -4,7 +4,7 @@ let app = express();
 const sequelize = require('./db');
 
 let user = require('./controllers/usercontroller'); 
-let log = require('./controllers/logcontroller'); 
+let survey = require('./controllers/logcontroller'); 
 let info = require('./controllers/userinfocontroller');
 
 sequelize.sync();
@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use('/user', user);
 
-app.use('/log', log);
+app.use('/survey', survey);
 
 app.use('/info', info);
 
