@@ -15,12 +15,13 @@ sequelize.authenticate().then(
 
 Admin = sequelize.import('./models/admin');
 Survey = sequelize.import('./models/survey')
-
+Results = sequelize.import('./models/results')
 
 Survey.belongsTo(Admin);
 Admin.hasMany(Survey);
 
-
+Results.belongsTo(Survey);
+Survey.hasOne(Results);
 
 
 module.exports = sequelize;

@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const User = require('../db').import('../models/user');
+const Admin = require('../db').import('../models/admin');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 //USER SIGNUP
 router.post('/register', function (req,res){
 
-    User.create({
+    Admin.create({
         username: req.body.user.username,
         password: bcrypt.hashSync(req.body.user.password, 13)
     })
@@ -28,7 +28,7 @@ router.post('/register', function (req,res){
 
 router.post('/login', function(req,res){
     
-    User.findOne({
+    Admin.findOne({
         where: {
             username: req.body.user.username
         }
